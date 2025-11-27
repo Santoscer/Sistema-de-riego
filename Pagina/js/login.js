@@ -2,22 +2,51 @@ document.getElementById("formularioLogin").addEventListener("submit", async func
   e.preventDefault();
 
   const email = document.getElementById("emailLogin").value.trim();
-  const password = document.getElementById("passwordLogin").value;
+  const password = document.getElementById("passwordLogin").value.trim();
   const resultado = document.getElementById("resultadoLogin");
+
+  // Validación en front
+  const dominios = [".com", ".es", ".co"];
+  const emailValido =
+    email.includes("@") && dominios.some((d) => email.endsWith(d));
+
+  if (!emailValido) {
+    resultado.textContent = "El correo debe contener @ y terminar en .com, .es o .co";
+    resultado.style.color = "red";
+    return;
+  }
+
+  if (password.length < 8) {
+    resultado.textContent = "La contraseña debe tener al menos 8 caracteres.";
+    resultado.style.color = "red";
+    return;
+  }
 
   try {
     const res = await fetch("/api/usuarios");
-    const usuarios = res.ok ? await res.json() : [];
 
-    const encontrado = usuarios.find(u =>
-      u.email === email && u.password === password
+    if (!res.ok) {
+      resultado.textContent = "No se pudo obtener la lista de usuarios.";
+      resultado.style.color = "red";
+      return;
+    }
+
+    const usuarios = await res.json();
+
+    if (!usuarios || usuarios.length === 0) {
+      resultado.textContent = "No hay usuarios registrados. Regístrate primero.";
+      resultado.style.color = "red";
+      return;
+    }
+
+    const encontrado = usuarios.find(
+      (u) => u.email === email && u.password === password
     );
 
     if (encontrado) {
       resultado.textContent = `Bienvenido, ${encontrado.nombre}`;
       resultado.style.color = "green";
 
-      // ✅ Guardamos el ID correctamente
       localStorage.setItem("id", encontrado.id);
       localStorage.setItem("nombre", encontrado.nombre);
 
@@ -29,7 +58,8 @@ document.getElementById("formularioLogin").addEventListener("submit", async func
       resultado.style.color = "red";
     }
   } catch (error) {
-    resultado.textContent = "Error al iniciar sesión.";
+    console.error(error);
+    resultado.textContent = "Error al iniciar sesión. Intenta de nuevo.";
     resultado.style.color = "red";
   }
 });

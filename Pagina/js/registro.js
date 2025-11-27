@@ -1,31 +1,63 @@
 document.getElementById("formularioRegistro").addEventListener("submit", async function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const usuario = {
-        nombre: document.getElementById("nombre").value,
-        email: document.getElementById("email").value,
-        telefono: document.getElementById("telefono").value,
-        password: document.getElementById("password").value
-    };
+  const nombre = document.getElementById("nombre").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const telefono = document.getElementById("telefono").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const resultado = document.getElementById("resultado");
 
-    try {
-        const response = await fetch("http://127.0.0.1:8000/api/registro", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(usuario)
-        });
+  // ==== VALIDACIÓN EN FRONT ====
 
-        const data = await response.json();
+  // Validar correo: debe tener @ y terminar en .com, .es o .co
+  const dominios = [".com", ".es", ".co"];
+  const emailValido =
+    email.includes("@") && dominios.some((d) => email.endsWith(d));
 
-        if (response.ok) {
-            alert("✅ Registro exitoso: " + data.mensaje);
-            document.getElementById("formularioRegistro").reset();
-        } else {
-            alert("⚠ Error: " + data.mensaje);
-        }
+  if (!emailValido) {
+    resultado.textContent = "El correo debe contener @ y terminar en .com, .es o .co.";
+    resultado.style.color = "red";
+    return;
+  }
 
-    } catch (error) {
-        alert("❌ Error de conexión con el servidor");
-        console.log(error);
+  // Validar longitud de contraseña (mínimo 8 caracteres)
+  if (password.length < 8) {
+    resultado.textContent = "La contraseña debe tener al menos 8 caracteres.";
+    resultado.style.color = "red";
+    return;
+  }
+
+  if (!nombre || !telefono) {
+    resultado.textContent = "Por favor, completa todos los campos.";
+    resultado.style.color = "red";
+    return;
+  }
+
+  const usuario = { nombre, email, telefono, password };
+
+  try {
+    // 🔴 ANTES: "http://127.0.0.1:8000/api/registro"
+    // 🟢 AHORA: ruta relativa para que funcione en Azure y en local
+    const response = await fetch("/api/registro", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(usuario),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      resultado.textContent = data.mensaje || "Usuario registrado correctamente.";
+      resultado.style.color = "green";
+      document.getElementById("formularioRegistro").reset();
+    } else {
+      // si tu backend manda "detail" o "mensaje"
+      resultado.textContent = data.detail || data.mensaje || "Error al registrar usuario.";
+      resultado.style.color = "red";
     }
+  } catch (error) {
+    console.error(error);
+    resultado.textContent = "Error de conexión con el servidor.";
+    resultado.style.color = "red";
+  }
 });
