@@ -1,0 +1,96 @@
+/* ======== ESTILO GENERAL ======== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #E6F5E6;
+}
+
+/* ======== BARRA SUPERIOR ======== */
+
+body > center:first-of-type {
+    width: 100%;
+    background: #fff;
+    border-bottom: 2px solid black;
+    padding: 8px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body > center:first-of-type a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+body > center:first-of-type img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+body > center:first-of-type a::after {
+    content: "  GreenCheck";
+    font-weight: 600;
+    font-size: 16px;
+    color: black;
+}
+
+/* ======== TARJETA CENTRAL ======== */
+
+article {
+    background: #fff;
+    width: 60%;
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.17);
+    text-align: center;
+}
+
+/* Imagen grande superior */
+#riegoregistro {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+/* Texto BIENVENIDO */
+h1 {
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 35px;
+}
+
+/* ======== BOTONES ======== */
+
+button {
+    width: 70%;
+    padding: 12px;
+    background: #36A043;
+    border: none;
+    border-radius: 40px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px auto;
+    display: block;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    background: #2d8b38;
+    transform: translateY(-2px);
+}

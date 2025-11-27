@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro de Dispositivos</title>
+  <link rel="stylesheet" href="css/registrodispositivo.css" />
+</head>
+<body>
+
+  <!-- Barra superior tipo las demás páginas -->
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="img/Logo.png" width="40" height="40" alt="Logo">
+      <span>GreenCheck</span>
+    </a>
+
+    <nav class="menu">
+      <a href="menu.html">Inicio</a>
+      <a href="RegistroDispositivos.html" class="active">Dispositivos</a>
+      <a href="datosSistemadeRiego.html">Lecturas</a>
+      <a href="historial.html">Historial</a>
+    </nav>
+  </header>
+
+  <!-- Contenedor blanco grande con 2 columnas -->
+  <main class="contenedor">
+
+    <!-- Columna izquierda: formulario -->
+    <section class="card formulario">
+      <h2>REGISTRO DE DISPOSITIVO</h2>
+
+      <!-- 👇 MISMO FORM, MISMO ID, MISMOS INPUTS -->
+      <form id="form-registro">
+        <input type="text" id="nombre" placeholder="NOMBRE DEL DISPOSITIVO" required />
+        <input type="text" id="serial" placeholder="SERIAL DEL DISPOSITIVO" required />
+        <input type="date" id="fechaCompra" required />
+        <input type="text" id="ubicacion" placeholder="UBICACIÓN" required />
+        <button type="submit"><h3>CONECTAR ARDUINO</h3></button>
+      </form>
+    </section>
+
+    <!-- Columna derecha: lista dinámica de dispositivos -->
+    <section class="card lista">
+      <h2>DISPOSITIVOS AGREGADOS</h2>
+
+      <!-- 👇 MISMO UL, MISMO ID: aquí seguirá llenando tu JS -->
+      <ul id="lista-dispositivos"></ul>
+    </section>
+
+  </main>
+
+  <script src="js/registroDispositivos.js"></script>
+</body>
+</html>

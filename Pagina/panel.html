@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Usuarios - FastAPI</title>
+    <link rel="stylesheet" href="css/panel.css">
+</head>
+<body>
+
+
+
+<header>
+    <img src="img/Logo.png" class="logo">
+</header>
+
+<section class="panel">
+    <h2 class="panel-title">Usuarios Registrados</h2>
+
+    <button class="panel-btn" onclick="cargarUsuarios()">Cargar Usuarios</button>
+    <button class="panel-btn cancelar-btn" onclick="toggleLista()">Mostrar/Ocultar Lista</button>
+
+    <div id="lista" class="lista-usuarios"></div>
+
+    <br><br>
+    <a href="index.html" class="panel-btn">CERRAR SESION</a>
+</section>
+
+<section id="editar-form" class="panel editar-panel" style="display:none;">
+    <h2 class="panel-title">Editar Usuario</h2>
+
+    <input id="edit-id" placeholder="ID" disabled>
+    <input id="edit-nombre" placeholder="Nombre">
+    <input id="edit-email" placeholder="Email">
+    <input id="edit-telefono" placeholder="Teléfono">
+    <input id="edit-password" type="password" placeholder="Contraseña">
+
+    <!-- CAMPO DE ROL (FALTABA) -->
+    <select id="edit-rol">
+        <option value="usuario">Usuario</option>
+        <option value="admin">Administrador</option>
+    </select>
+
+    <!-- PATCH -->
+    <button id="patch-btn" class="panel-btn" onclick="enviarEdicion()">Guardar Cambios (PATCH)</button>
+
+    <!-- PUT -->
+    <button id="put-btn" class="panel-btn put-btn" style="display:none;" onclick="enviarReplace()">Reemplazar (PUT)</button>
+
+    <button class="panel-btn cancelar-btn" onclick="cerrarFormulario()">Cancelar</button>
+</section>
+
+<script src="js/panel.js"></script>
+</body>
+</html>
+

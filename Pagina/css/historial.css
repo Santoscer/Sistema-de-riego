@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #E6F5E6;
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 2px solid black;
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.logo span {
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
+}
+
+.menu a {
+  margin-left: 18px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #111;
+}
+
+.menu .active {
+  font-weight: 600;
+}
+
+/* ===== TARJETA BLANCA DEL HISTORIAL ===== */
+
+.contenedor-historial {
+  max-width: 1100px;
+  margin: 70px auto 60px;
+  padding: 40px 40px 50px;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  text-align: center;
+}
+
+.contenedor-historial h2 {
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+#mensaje {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* ===== TABLA ===== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th, td {
+  border: 1px solid #d3e9d3;
+  padding: 10px 15px;
+}
+
+th {
+  background: #bde2b8;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f7fff7;
+}

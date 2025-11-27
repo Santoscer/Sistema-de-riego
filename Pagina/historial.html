@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial</title>
+  <link rel="stylesheet" href="css/historial.css">
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR -->
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="img/Logo.png" alt="Logo">
+      <span>GreenCheck</span>
+    </a>
+
+    <nav class="menu">
+      <a href="menu.html">Inicio</a>
+      <a href="RegistroDispositivos.html">Dispositivos</a>
+      <a href="datosSistemadeRiego.html">Lecturas</a>
+      <a href="historial.html" class="active">Historial</a>
+    </nav>
+  </header>
+
+  <!-- TARJETA BLANCA CON HISTORIAL -->
+  <div class="contenedor-historial">
+    <h2>HISTORIAL DE HUMEDAD</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Humedad</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-historial"></tbody>
+    </table>
+  </div>
+
+  <script src="js/historial.js"></script>
+</body>
+</html>

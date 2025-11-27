@@ -1,0 +1,139 @@
+/* estilos.css – LOGIN y REGISTRO */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #E6F5E6;
+  min-height: 100vh;
+}
+
+/* Barra superior tipo mockup */
+body > center:first-of-type {
+  width: 100%;
+  margin: 0;
+  padding: 10px 40px;
+  background: #ffffff;
+  border-bottom: 2px solid #000000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+body > center:first-of-type a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+body > center:first-of-type img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+body > center:first-of-type a::after {
+  content: "GreenCheck";
+  font-weight: 600;
+  font-size: 16px;
+  color: #111111;
+}
+
+
+/* Tarjeta central para el formulario */
+article {
+  max-width: 520px;
+  margin: 80px auto 40px;
+  padding: 40px 48px 48px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* Imagen en la parte superior del card */
+#riegoregistro {
+  width: 100%;
+  height: auto;
+  border-radius: 24px;
+  object-fit: cover;
+  margin-bottom: 24px;
+}
+
+/* Títulos LOGIN / REGISTRARSE */
+h1 {
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #333333;
+}
+
+/* Subtítulos pequeños si los usas */
+h3, p {
+  font-size: 13px;
+  color: #555555;
+  margin-bottom: 10px;
+}
+
+/* Formulario */
+form {
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #C6DEC6;
+  background: #E7F4E7;
+  font-size: 13px;
+}
+
+input::placeholder {
+  color: #4F6B4F;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* Botón principal */
+button {
+  border: none;
+  background: #36A043;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 10px 24px;
+  cursor: pointer;
+  margin: 8px auto 0;
+  min-width: 200px;
+  display: block;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button h2 {
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background: #2b8035;
+  transform: translateY(-1px);
+}
+
+/* Mensajes debajo del formulario */
+.resultado {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #333333;
+  text-align: center;
+}
