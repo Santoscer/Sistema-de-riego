@@ -55,9 +55,19 @@
     <button type="submit"><h2>CREAR CUENTA</h2></button>
   </form>
 
+  <!-- Aquí mostramos mensajes de error en texto -->
   <div class="resultado" id="resultado"></div>
 
   <p>¿Ya estás registrado? <a href="login.html">Haz clic aquí para iniciar sesión</a></p>
+
+  <!-- 🔔 MODAL BONITO DE ÉXITO -->
+  <div id="modalExito" class="modal">
+    <div class="modal-contenido">
+      <h2>✔ Registro exitoso</h2>
+      <p id="modalMensaje">Usuario registrado correctamente.</p>
+      <button id="btnCerrarModal">Aceptar</button>
+    </div>
+  </div>
 
   <script src="js/registro.js"></script>
 </article>
