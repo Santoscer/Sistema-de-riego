@@ -23,13 +23,13 @@ class Usuario(BaseModel):
     id: Optional[str] = None
     nombre: str
     email: str
-    telefono: str
+    telefono: int
     password: str
 
 class UsuarioUpdate(BaseModel):
     nombre: Optional[str] = None
     email: Optional[str] = None
-    telefono: Optional[str] = None
+    telefono: Optional[int] = None
     password: Optional[str] = None
 
 # ==== BASE DE DATOS EN MEMORIA ====
