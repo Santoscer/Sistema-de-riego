@@ -1,6 +1,7 @@
 const API_URL = "/api";
 let usuarioActual = null;
 
+
 /* ============================
    OBTENER ID DEL USUARIO LOGUEADO
 ============================ */
