@@ -7,49 +7,61 @@
 </head>
 <body>
 
-
-
 <header>
     <img src="img/Logo.png" class="logo">
 </header>
 
 <section class="panel">
     <h2 class="panel-title">Usuarios Registrados</h2>
-
     <button class="panel-btn" onclick="cargarUsuarios()">Cargar Usuarios</button>
-    <button class="panel-btn cancelar-btn" onclick="toggleLista()">Mostrar/Ocultar Lista</button>
-
     <div id="lista" class="lista-usuarios"></div>
 
     <br><br>
-    <a href="index.html" class="panel-btn">CERRAR SESION</a>
+    <a href="login.html" class="panel-btn">CERRAR SESION</a>
 </section>
 
+<!-- FORMULARIO ÚNICO -->
 <section id="editar-form" class="panel editar-panel" style="display:none;">
-    <h2 class="panel-title">Editar Usuario</h2>
-
-    <input id="edit-id" placeholder="ID" disabled>
-    <input id="edit-nombre" placeholder="Nombre">
-    <input id="edit-email" placeholder="Email">
-    <input id="edit-telefono" placeholder="Teléfono">
-    <input id="edit-password" type="password" placeholder="Contraseña">
-
-    <!-- CAMPO DE ROL (FALTABA) -->
-    <select id="edit-rol">
-        <option value="usuario">Usuario</option>
-        <option value="admin">Administrador</option>
-    </select>
 
     <!-- PATCH -->
-    <button id="patch-btn" class="panel-btn" onclick="enviarEdicion()">Guardar Cambios (PATCH)</button>
+    <div id="patch-panel" style="display:none;">
+        <h3>Editar con PATCH (solo un campo)</h3>
+
+        <select id="campo-editar">
+            <option value="">Seleccione campo a editar</option>
+            <option value="nombre">Nombre</option>
+            <option value="email">Email</option>
+            <option value="telefono">Teléfono</option>
+            <option value="password">Contraseña</option>
+            <option value="rol">Rol</option>
+        </select>
+
+        <input id="nuevo-valor" placeholder="Nuevo valor">
+
+        <button class="panel-btn" onclick="enviarEdicionIndividual()">Aplicar PATCH</button>
+        <button class="panel-btn cancelar-btn" onclick="cerrarFormulario()">Cancelar</button>
+    </div>
 
     <!-- PUT -->
-    <button id="put-btn" class="panel-btn put-btn" style="display:none;" onclick="enviarReplace()">Reemplazar (PUT)</button>
+    <div id="put-panel" style="display:none;">
+        <h3>Reemplazar con PUT (todos los campos)</h3>
 
-    <button class="panel-btn cancelar-btn" onclick="cerrarFormulario()">Cancelar</button>
+        <input id="edit-nombre" placeholder="Nombre">
+        <input id="edit-email" placeholder="Email">
+        <input id="edit-telefono" placeholder="Teléfono">
+        <input id="edit-password" type="password" placeholder="Contraseña">
+
+        <select id="edit-rol">
+            <option value="usuario">Usuario</option>
+            <option value="admin">Administrador</option>
+        </select>
+
+        <button class="panel-btn put-btn" onclick="enviarReplace()">Reemplazar (PUT)</button>
+        <button class="panel-btn cancelar-btn" onclick="cerrarFormulario()">Cancelar</button>
+    </div>
+
 </section>
 
 <script src="js/panel.js"></script>
 </body>
 </html>
-

@@ -1,35 +1,83 @@
-document.getElementById("formularioLogin").addEventListener("submit", async function (e) {
-  e.preventDefault();
+const API_URL = "/api";
 
-  const email = document.getElementById("emailLogin").value.trim();
-  const password = document.getElementById("passwordLogin").value;
-  const resultado = document.getElementById("resultadoLogin");
-
-  try {
-    const res = await fetch("/api/usuarios");
-    const usuarios = res.ok ? await res.json() : [];
-
-    const encontrado = usuarios.find(u =>
-      u.email === email && u.password === password
-    );
-
-    if (encontrado) {
-      resultado.textContent = `Bienvenido, ${encontrado.nombre}`;
-      resultado.style.color = "green";
-
-      // ✅ Guardamos el ID correctamente
-      localStorage.setItem("id", encontrado.id);
-      localStorage.setItem("nombre", encontrado.nombre);
-
-      setTimeout(() => {
-        window.location.href = "menu.html";
-      }, 1000);
-    } else {
-      resultado.textContent = "Credenciales incorrectas.";
-      resultado.style.color = "red";
+/* ============================
+   MANEJAR INICIO DE SESIÓN
+============================ */
+document.getElementById('formularioLogin').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('emailLogin').value.trim();
+    const password = document.getElementById('passwordLogin').value;
+    const resultado = document.getElementById('resultadoLogin');
+    
+    // Limpiar resultado anterior
+    resultado.textContent = '';
+    resultado.style.color = '';
+    
+    // Validación básica
+    if (!email || !password) {
+        resultado.textContent = 'Por favor, completa todos los campos.';
+        resultado.style.color = 'red';
+        return;
     }
-  } catch (error) {
-    resultado.textContent = "Error al iniciar sesión.";
-    resultado.style.color = "red";
-  }
+    
+    // Mostrar mensaje de carga
+    resultado.textContent = 'Iniciando sesión...';
+    resultado.style.color = 'blue';
+    
+    try {
+        const response = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Login exitoso
+            resultado.textContent = `✅ Bienvenido, ${data.nombre}. Redirigiendo...`;
+            resultado.style.color = 'green';
+            
+            // Guardar sesión
+            sessionStorage.setItem('userId', data.id);
+            sessionStorage.setItem('userName', data.nombre);
+            sessionStorage.setItem('userEmail', data.email);
+
+            localStorage.setItem('userId', data.id);
+            localStorage.setItem('userName', data.nombre);
+            
+            // 🔹 Redirigir al MENÚ (NO al panel)
+            setTimeout(() => {
+                window.location.href = 'menu.html';
+            }, 1000);
+            
+        } else {
+            // Error en las credenciales
+            resultado.textContent = '❌ ' + (data.detail || data.mensaje || 'Credenciales incorrectas');
+            resultado.style.color = 'red';
+        }
+        
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+        resultado.textContent = '❌ Error de conexión con el servidor.';
+        resultado.style.color = 'red';
+    }
+});
+
+/* ============================
+   VERIFICAR SI YA HAY SESIÓN
+============================ */
+window.addEventListener('DOMContentLoaded', () => {
+    const userId = sessionStorage.getItem('userId');
+    
+    // 🔹 Si ya hay sesión activa, ir al MENÚ
+    if (userId) {
+        window.location.href = 'menu.html';
+    }
 });

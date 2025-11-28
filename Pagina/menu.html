@@ -11,8 +11,8 @@
     <!-- BARRA SUPERIOR -->
     <header class="navbar">
         <div class="navbar-left">
-            <a href="index.html" class="logo">
-                <img src="img/logo.png" alt="Logo GreenCheck">
+            <a href="menu.html" class="logo">
+                <img src="img/Logo.png" alt="Logo GreenCheck">
                 <span>GreenCheck</span>
             </a>
         </div>
@@ -20,15 +20,13 @@
         <h1 class="navbar-title">SISTEMA DE RIEGO AUTOMÁTICO</h1>
 
         <div class="navbar-right">
-            <button type="button" onclick="location.href='RegistroDispositivos.html'">
-                MIS DISPOSITIVOS
-            </button>
 
-            <button type="button" onclick="location.href='login.html'">
+            <!-- 🔧 BOTÓN DE CERRAR SESIÓN CORREGIDO -->
+            <button type="button" onclick="cerrarSesion()">
                 CERRAR SESION
             </button>
-     
-            <button type="button" onclick="location.href='Panel.html'">
+
+            <button type="button" onclick="location.href='panel.html'">
                 ADMINISTAR USUARIOS
             </button>
         </div>
@@ -113,19 +111,28 @@
             </article>
 
             <article class="card">
-            <h2>💻 Implementación en Desarrollo de Software</h2>
-            <ul>
-                <li><strong>Versionamiento y GitHub:</strong> control de cambios eficiente, trabajo colaborativo y administración clara del código fuente.</li>
-                <li><strong>Uso de APIs y FastAPI:</strong> creación de servicios rápidos, seguros y escalables mediante rutas, validaciones y modelos.</li>
-                <li><strong>Despliegue en Azure:</strong> publicación de aplicaciones web en la nube con alta disponibilidad y fácil administración.</li>
-                <li><strong>Principios SOLID:</strong> desarrollo de código mantenible, flexible y estructurado siguiendo buenas prácticas.</li>
-                <li><strong>Patrones de diseño:</strong> soluciones reutilizables para problemas comunes, mejorando la arquitectura del software.</li>
-                <li><strong>Métodos HTTP:</strong> comunicación entre cliente-servidor mediante acciones como GET, POST, PUT y DELETE.</li>
-            </ul>
+                <h2>💻 Implementación en Desarrollo de Software</h2>
+                <ul>
+                    <li><strong>Versionamiento y GitHub:</strong> control de cambios eficiente, trabajo colaborativo y administración clara del código fuente.</li>
+                    <li><strong>Uso de APIs y FastAPI:</strong> creación de servicios rápidos, seguros y escalables mediante rutas, validaciones y modelos.</li>
+                    <li><strong>Despliegue en Azure:</strong> publicación de aplicaciones web en la nube con alta disponibilidad y fácil administración.</li>
+                    <li><strong>Principios SOLID:</strong> desarrollo de código mantenible, flexible y estructurado siguiendo buenas prácticas.</li>
+                    <li><strong>Patrones de diseño:</strong> soluciones reutilizables para problemas comunes, mejorando la arquitectura del software.</li>
+                    <li><strong>Métodos HTTP:</strong> comunicación entre cliente-servidor mediante acciones como GET, POST, PUT y DELETE.</li>
+                </ul>
             </article>
 
         </section>
     </main>
+
+    <!-- 🔧 SCRIPT DE CERRAR SESIÓN -->
+    <script>
+        function cerrarSesion() {
+            sessionStorage.clear();
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+    </script>
 
 </body>
 </html>
