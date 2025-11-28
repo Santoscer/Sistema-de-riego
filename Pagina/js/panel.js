@@ -25,8 +25,8 @@ async function cargarUsuarios() {
 
                 <div class="card-actions">
                     <button class="card-btn delete-btn" onclick="borrar('${u.id}')">Eliminar</button>
-                    <button class="card-btn edit-btn" onclick="editar('${u.id}', false)">Editar (PATCH)</button>
-                    <button class="card-btn put-btn" onclick="editar('${u.id}', true)">Reemplazar (PUT)</button>
+                    <button class="card-btn edit-btn" onclick="abrirPatch('${u.id}')">Editar (PATCH)</button>
+                    <button class="card-btn put-btn" onclick="abrirPut('${u.id}')">Reemplazar (PUT)</button>
                 </div>
             `;
 
@@ -52,56 +52,74 @@ async function borrar(id) {
 }
 
 /* ============================
-        EDITAR - ABRIR FORM
+     ABRIR FORM (PATCH)
 ============================ */
-function editar(id, esPut = false) {
+function abrirPatch(id) {
     usuarioActual = id;
 
-    fetch(`${API_URL}/usuarios/${id}`)
-        .then(res => res.json())
-        .then(u => {
-            document.getElementById("edit-id").value = u.id;
-            document.getElementById("edit-nombre").value = u.nombre;
-            document.getElementById("edit-email").value = u.email;
-            document.getElementById("edit-telefono").value = u.telefono;
-            document.getElementById("edit-password").value = "";
-            document.getElementById("edit-rol").value = u.rol;
-            document.getElementById("editar-form").style.display = "block";
-        })
-        .catch(() => {
-            document.getElementById("editar-form").style.display = "block";
-        })
-        .finally(() => {
-            document.getElementById("put-btn").style.display = esPut ? "inline-block" : "none";
-            document.getElementById("patch-btn").style.display = esPut ? "none" : "inline-block";
-        });
-}
+    // Mostrar formulario general
+    document.getElementById("editar-form").style.display = "block";
 
-function cerrarFormulario() {
-    usuarioActual = null;
-    document.getElementById("editar-form").style.display = "none";
+    // Mostrar solo PATCH
+    document.getElementById("patch-panel").style.display = "block";
+    document.getElementById("put-panel").style.display = "none";
 }
 
 /* ============================
-        PATCH - EDITAR
+     ABRIR FORM (PUT)
 ============================ */
-async function enviarEdicion() {
+async function abrirPut(id) {
+    usuarioActual = id;
+
+    try {
+        const res = await fetch(`${API_URL}/usuarios/${id}`);
+        const u = await res.json();
+
+        document.getElementById("edit-nombre").value = u.nombre;
+        document.getElementById("edit-email").value = u.email;
+        document.getElementById("edit-telefono").value = u.telefono;
+        document.getElementById("edit-password").value = "";
+        document.getElementById("edit-rol").value = u.rol;
+
+    } catch {
+        alert("Error al cargar datos del usuario");
+    }
+
+    // Mostrar formulario general
+    document.getElementById("editar-form").style.display = "block";
+
+    // Mostrar solo PUT
+    document.getElementById("patch-panel").style.display = "none";
+    document.getElementById("put-panel").style.display = "block";
+}
+
+/* ============================
+       CERRAR FORM
+============================ */
+function cerrarFormulario() {
+    usuarioActual = null;
+    document.getElementById("editar-form").style.display = "none";
+    document.getElementById("patch-panel").style.display = "none";
+    document.getElementById("put-panel").style.display = "none";
+
+    document.getElementById("nuevo-valor").value = "";
+    document.getElementById("campo-editar").value = "";
+}
+
+/* ============================
+        PATCH - EDITAR 1 CAMPO
+============================ */
+async function enviarEdicionIndividual() {
     if (!usuarioActual) return;
 
+    const campo = document.getElementById("campo-editar").value;
+    const valor = document.getElementById("nuevo-valor").value.trim();
+
+    if (!campo) return alert("Debe seleccionar un campo.");
+    if (!valor) return alert("El nuevo valor no puede estar vacío.");
+
     const datos = {};
-
-    const nombre = document.getElementById("edit-nombre").value;
-    const email = document.getElementById("edit-email").value;
-    const telefono = document.getElementById("edit-telefono").value;
-    const password = document.getElementById("edit-password").value;
-    const rol = document.getElementById("edit-rol").value;
-
-    // Solo enviar campos modificados
-    if (nombre) datos.nombre = nombre;
-    if (email) datos.email = email;
-    if (telefono) datos.telefono = telefono;
-    if (password) datos.password = password; // evitar campo vacío
-    if (rol) datos.rol = rol;
+    datos[campo] = valor;
 
     const res = await fetch(`${API_URL}/usuarios/${usuarioActual}`, {
         method: "PATCH",
@@ -111,6 +129,7 @@ async function enviarEdicion() {
 
     const json = await res.json();
     alert(json.mensaje || json.descripcion);
+
     cerrarFormulario();
     cargarUsuarios();
 }
@@ -122,11 +141,11 @@ async function enviarReplace() {
     if (!usuarioActual) return;
 
     const datos = {
-        nombre: document.getElementById("edit-nombre").value,
-        email: document.getElementById("edit-email").value,
-        telefono: document.getElementById("edit-telefono").value,
-        password: document.getElementById("edit-password").value,
-        rol: document.getElementById("edit-rol").value
+        nombre: document.getElementById("edit-nombre").value.trim(),
+        email: document.getElementById("edit-email").value.trim(),
+        telefono: document.getElementById("edit-telefono").value.trim(),
+        password: document.getElementById("edit-password").value.trim(),
+        rol: document.getElementById("edit-rol").value.trim()
     };
 
     const res = await fetch(`${API_URL}/usuarios/${usuarioActual}`, {
@@ -137,6 +156,7 @@ async function enviarReplace() {
 
     const json = await res.json();
     alert(json.mensaje || json.descripcion);
+
     cerrarFormulario();
     cargarUsuarios();
 }
