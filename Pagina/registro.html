@@ -16,19 +16,16 @@
 
 <article>
   <h1>REGISTRARSE</h1>
+
   <center>
     <img src="img/riego-automatico.webp" id="riegoregistro" width="500" height="200">
   </center>
 
   <form id="formularioRegistro">
     <label for="nombre"></label>
-    <input type="text"
-           id="nombre"
-           placeholder="NOMBRE COMPLETO"
-           required>
+    <input type="text" id="nombre" placeholder="NOMBRE COMPLETO" required>
 
     <label for="email"></label>
-    <!-- EMAIL con @ y .com/.es/.co -->
     <input type="email"
            id="email"
            placeholder="CORREO ELECTRONICO"
@@ -37,13 +34,9 @@
            title="Debe contener @ y terminar en .com, .es o .co">
 
     <label for="telefono"></label>
-    <input type="number"
-           id="telefono"
-           placeholder="TELEFONO"
-           required>
+    <input type="number" id="telefono" placeholder="TELEFONO" required>
 
     <label for="password"></label>
-    <!-- PASSWORD mínimo 8 caracteres -->
     <input type="password"
            id="password"
            placeholder="CREAR CONTRASEÑA"
@@ -58,6 +51,15 @@
   <div class="resultado" id="resultado"></div>
 
   <p>¿Ya estás registrado? <a href="login.html">Haz clic aquí para iniciar sesión</a></p>
+
+  <!-- MODAL DE ÉXITO -->
+  <div id="modalExito" class="modal">
+    <div class="modal-contenido">
+      <h2>✔ Registro exitoso</h2>
+      <p id="modalMensaje">Usuario registrado correctamente.</p>
+      <button id="btnCerrarModal">Aceptar</button>
+    </div>
+  </div>
 
   <script src="js/registro.js"></script>
 </article>
